@@ -12,7 +12,7 @@ import * as util from './util';
  * 判断单个节点是否符合规范
  * @param {*} node 
  */
-export function validateNode ( node ) {
+export function validateNode ( node, graph ) {
     if ( !node ) {
         return false;
     }
@@ -104,17 +104,21 @@ export class GraphStandard {
      * @param {*} graph 
      */
     nodeStandardized ( graph ) {
+        if ( !graph ) {
+            return false;
+        }
+
         const nodes = graph.getNodes();
         for ( let node of nodes ) {
             let ret = validateNode(node);
-            if ( typeof ret != true ) {
+            if (  ret != true ) {
                 return ret;
             }        
         }
         
         for ( let node of nodes ) {
             let ret = this.nodeValidator(node);
-            if ( typeof ret != true ) {
+            if ( ret != true ) {
                 return '节点没有绑定因子信息';
             }        
         }
@@ -127,6 +131,10 @@ export class GraphStandard {
      * @param {*} graph 
      */
     edgeStandardized ( graph ) {
+        if ( !graph ) {
+            return false;
+        }
+
         const edges = graph.getEdges();
         for ( let edge of edges ) {
             if ( !validateEdge(edge) ) {
