@@ -73,6 +73,7 @@ export default {
         init (customCfg, data) {
             const editor = this.editor = new G6Editor();
             this.graphStandard = new GraphStandard(editor, customCfg);
+            window.graphStandard = this.graphStandard;
 
             this.$nextTick( () => {
                 this.initUI(editor);

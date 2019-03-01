@@ -71,6 +71,12 @@ export class GraphStandard {
         this.nodeValidator = nodeValidator;
     }
 
+    // 得到page
+    getFlow () {
+        const flow = this.editor.getCurrentPage();
+        return flow;
+    }
+
     // 得到画布
     getGraph () {
         const page = this.editor.getCurrentPage();
@@ -148,21 +154,32 @@ export class GraphStandard {
 
     // =================   动作类    =================
     // 简化设计,请体谅 !
+
     /**
      * 读取画布的数据[符合第三方要求的格式,故该函数逻辑不可复用]
      * @param {*} data : 第三方格式的数据
      */
-    readGraphData ( data ) {
+    readGraphData ( graphicals ) {
+        if ( !graphicals || typeof graphicals != 'object' || 
+                            !graphicals.nodes || !graphicals.edges ) {
+            throw new Error('g6-vuele-editor readGraphData param error');
+        }
 
+        const flow = this.getFlow();
+        flow.read(graphicals);
+
+        return graphicals;
     }
 
     /**
      * 得到画布的数据[符合第三方要求的格式,故该函数逻辑不可复用]
      */
     saveGraphData () {
-        const graph = this.getGraph();
+        const flow = this.getFlow();
         
-        
+        const graphicals = flow.save();
+
+        return graphicals;
     }
 }
 

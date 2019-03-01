@@ -201,15 +201,13 @@ export default function init (editor, rootComponent, cb) {
     // 执行命令前
     editor.on('beforecommandexecute', ev => {
         const { command } = ev;
-
-        
     });
     // 执行命令后
     editor.on('aftercommandexecute', ev => {
         const { command } = ev, page = editor.getCurrentPage(),
                         graph = page.getGraph();
         
-        const item = command.addModel;                
+        const item = command.addModel;            
     });
 }
 
