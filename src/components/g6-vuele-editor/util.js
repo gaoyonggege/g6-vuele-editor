@@ -147,9 +147,9 @@ export function nodeInLines (node, graph) {
 
     const edges = graph.getEdges();    
     for ( let edge of edges ) {
-        let edgeTarget = edge['target'];
-        if ( (typeof node === 'string' && edgeTarget.id == node) || 
-                (typeof node === 'object' && edgeTarget.id == node.id) ) {
+        let edgeTarget = edge['model']['target'];
+        if ( (typeof node === 'string' && edgeTarget == node) || 
+                (typeof node === 'object' && edgeTarget == node.id) ) {
             lists.push(edge);
         }
     }
@@ -170,9 +170,9 @@ export function nodeOutLines (node, graph) {
 
     const edges = graph.getEdges();    
     for ( let edge of edges ) {
-        let edgeTarget = edge['source'];
-        if ( (typeof node === 'string' && edgeTarget.id == node) || 
-                (typeof node === 'object' && edgeTarget.id == node.id) ) {
+        let edgeTarget = edge['model']['source'];
+        if ( (typeof node === 'string' && edgeTarget == node) || 
+                (typeof node === 'object' && edgeTarget == node.id) ) {
             lists.push(edge);
         }
     }

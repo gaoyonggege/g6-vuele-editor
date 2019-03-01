@@ -166,6 +166,7 @@
     margin: 7px 10px 10px;
 }
 .gve-navigator .panel-title {
+    padding-left: 10px;
     height: 32px;
     border-top: 1px solid #DCE3E8;
     border-bottom: 1px solid #DCE3E8;
@@ -176,7 +177,7 @@
 .gve-navigator .minimap {
     width: 200px;
     height: 140px;
-    border: 1px rgba(255,200,100,.5) solid;
+    border: 1px rgba(255,200,100,.2) solid;
 }
 .gve-zoom-slider {
     position: relative;

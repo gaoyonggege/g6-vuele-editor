@@ -17,8 +17,8 @@ export function validateNode ( node, graph ) {
         return false;
     }
 
-    const outs = util.nodeOutLines(node, graph),  // 出口边集合
-            ins = util.nodeInLines(node, graph);  // 入口边集合
+    const outs = util.nodeOutLines(node.model, graph),  // 出口边集合
+            ins = util.nodeInLines(node.model, graph);  // 入口边集合
 
     if ( util.isStartNode(node.model) ) {
         if ( outs.length != 1 || ins.length > 0 ) {
@@ -93,11 +93,17 @@ export class GraphStandard {
     graphStandardized () {
         const graph = this.getGraph();
 
-        let ret = this.nodeStandardized(graph);
+        const nodes = graph.getNodes(),
+                    edges = graph.getEdges();
+        if ( !nodes || !nodes.length ) {
+            return '编辑器没有节点';
+        }            
+
+        let ret = this.nodeStandardized(graph, nodes);
         if ( ret != true ) {
             return ret;
         }
-        ret = this.edgeStandardized(graph);
+        ret = this.edgeStandardized(graph, edges);
         if ( ret != true ) {
             return ret;   
         }
@@ -109,21 +115,20 @@ export class GraphStandard {
      * 校验全部节点是否符合规范
      * @param {*} graph 
      */
-    nodeStandardized ( graph ) {
+    nodeStandardized ( graph, nodes ) {
         if ( !graph ) {
             return false;
         }
 
-        const nodes = graph.getNodes();
         for ( let node of nodes ) {
-            let ret = validateNode(node);
+            let ret = validateNode(node, graph);
             if (  ret != true ) {
                 return ret;
             }        
         }
         
         for ( let node of nodes ) {
-            let ret = this.nodeValidator(node);
+            let ret = this.nodeValidator(node, graph);
             if ( ret != true ) {
                 return '节点没有绑定因子信息';
             }        
@@ -136,14 +141,13 @@ export class GraphStandard {
      * 校验全部边是否符合规范
      * @param {*} graph 
      */
-    edgeStandardized ( graph ) {
+    edgeStandardized ( graph, edges ) {
         if ( !graph ) {
             return false;
         }
 
-        const edges = graph.getEdges();
         for ( let edge of edges ) {
-            if ( !validateEdge(edge) ) {
+            if ( !validateEdge(edge, graph) ) {
                 return '连接边线有问题!';
             }
         }

@@ -22,7 +22,6 @@ export default {
   },
   methods: {
       node_click ( item, cb ) {
-        debugger
         item.model.label = '中欧\n哈哈';
         cb(item);
       },
