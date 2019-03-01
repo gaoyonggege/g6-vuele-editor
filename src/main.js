@@ -1,9 +1,8 @@
 import './assets/base.css';
 
-import './components/g6-vuele-editor/assets/font.css';
-import './components/g6-vuele-editor/assets/editor.css';
-
 import 'element-ui/lib/theme-chalk/index.css';
+
+import './components/g6-vuele-editor/assets/editor.css';
 
 
 import G6 from '@antv/g6';
