@@ -5,7 +5,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './components/g6-vuele-editor/assets/editor.css';
 
 
-import G6 from '@antv/g6';
+// import G6 from '@antv/g6';
 //import '@antv/g6/plugins';
 import Vue from 'vue'
 import App from './App.vue'

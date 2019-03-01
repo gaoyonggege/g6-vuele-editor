@@ -28,7 +28,7 @@ export default {
       },
   },
   mounted () {
-    this.$refs.editor.init({
+    this.$refs.editor.init(null, {
       nodeValidator: function ( node ) {
         return true;
       },

@@ -207,7 +207,7 @@ export default function init (editor, rootComponent, cb) {
         const { command } = ev, page = editor.getCurrentPage(),
                         graph = page.getGraph();
         
-        const item = command.addModel;            
+        const item = command.addModel;
     });
 }
 

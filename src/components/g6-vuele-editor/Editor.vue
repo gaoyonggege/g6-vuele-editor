@@ -70,7 +70,7 @@ export default {
         }                
     },
     methods: {
-        init (customCfg, data) {
+        init (data, customCfg) {
             const editor = this.editor = new G6Editor();
             this.graphStandard = new GraphStandard(editor, customCfg);
             window.graphStandard = this.graphStandard;
@@ -85,8 +85,6 @@ export default {
             initCommand(editor, this);
 
             this.$nextTick( () => {
-                const pages = editor.getComponentsByType('page');
-
                 const page = editor.getCurrentPage();
                 page.changeAddEdgeModel({
                     shape: 'flow-polyline-round'
