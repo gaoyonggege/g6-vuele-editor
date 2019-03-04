@@ -1,9 +1,9 @@
 <template>
 <div class="gve-itempannel" ref="container">
-    <img draggable="false" :src="svg_sartend" data-type="node" data-shape="flow-circle" data-size="72*72" data-color="#FA8C16" data-label="起止节点" class="getItem" />
-    <img draggable="false" :src="svg_normal" data-type="node" data-shape="flow-rect" data-size="80*48" data-color="#1890FF" data-label="常规节点" class="getItem" />
-    <img draggable="false" :src="svg_bifurcate" data-type="node" data-shape="flow-rhombus" data-size="80*72" data-color="#13C2C2" data-label="分叉节点" class="getItem" />
-    <img draggable="false" :src="svg_model" data-type="node" data-shape="flow-capsule" data-size="80*48" data-color="#722ED1" data-label="模型节点" class="getItem" />
+    <img draggable="false" :src="svg_sartend" data-type="node" data-shape="flow-circle" data-size="72*72" data-color="#FA8C16" data-label="起始节点" class="getItem" />
+    <img draggable="false" :src="svg_normal" data-type="node" data-shape="flow-rect" data-size="80*48" data-color="#1890FF" data-label="风控节点" class="getItem" />
+    <img draggable="false" :src="svg_bifurcate" data-type="node" data-shape="flow-rhombus" data-size="80*72" data-color="#13C2C2" data-label="路由节点" class="getItem" />
+    <img draggable="false" :src="svg_model" data-type="node" data-shape="flow-capsule" data-size="80*48" data-color="#722ED1" data-label="额度节点" class="getItem" />
 </div>
 </template>
 

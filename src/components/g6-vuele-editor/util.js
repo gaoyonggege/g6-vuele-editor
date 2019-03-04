@@ -363,3 +363,166 @@ export function isNewEdgeLegal ( newEdgeItem, graph ) {
         return true;
     }
 }
+
+
+// ========================     查找     ===========================
+/**
+ *  全部依赖model
+ */
+
+ /**
+ * 通过node id在集合中查找node
+ * @param {*} ndoeId 
+ * @param {*} nodes 
+ */
+export function findNodeById ( ndoeId, nodes ) {
+    if ( !ndoeId || !nodes || !Array.isArray(nodes) ) {
+        return;
+    }
+
+    for ( let node of nodes ) {
+        if ( ndoeId == node.id ) {
+            return node;
+        }
+    }
+
+    return null;
+}
+
+/**
+ * 查找起始节点
+ * @param {*} nodes 
+ */
+export function findStartNode ( nodes ) {
+    if ( !nodes || !Array.isArray(nodes) ) {
+        return;
+    }
+
+    for ( let node of nodes ) {
+        if ( isStartNode(node) ) {
+            return node;
+        }
+    }
+}
+
+/**
+ * 查找起始节点的下一个节点
+ * @param {*} nodes 
+ * @param {*} edges 
+ */
+export function findStartNextNode ( nodes, edges ) {
+    if ( !nodes || !Array.isArray(nodes) || !edges || !Array.isArray(edges) ) {
+        return null;
+    }    
+
+    const startNode = findStartNextNode(nodes);
+    if ( !startNode ) {
+        return null;
+    }
+
+    let children = findNodeOutEdge(startNode);
+    if ( !children || children.length != 1 ) {
+        return '起始节点的出口边不是1';
+    }   
+
+    const startNextNode = findNodeById( children[0].source );
+    return startNextNode;
+}
+
+
+
+
+
+/**
+ * 计算node节点的入口边
+ * @param {*} node 
+ * @param {*} edges 
+ */
+export function findNodeInEdge ( node, edges ) {
+    if ( !node || !edges || !Array.isArray(edges) ) {
+        return [];
+    }
+
+    const ins = [];
+    for ( let edge of edges ) {
+        if ( edge.target == node.id ) {
+            ins.push(edge);
+        }            
+    }
+    return ins;
+}
+/**
+ * 计算node节点的出口边
+ * @param {*} node 
+ * @param {*} edges 
+ */
+export function findNodeOutEdge ( node, edges ) {
+    if ( !node || !edges || !Array.isArray(edges) ) {
+        return [];
+    }
+
+    const outs = [];
+    for ( let edge of edges ) {
+        if ( edge.source == node.id ) {
+            outs.push(edge);
+        }    
+    }
+    return outs;
+}
+
+
+
+
+/**
+ * 查找节点的父节点
+ * @param {*} node 
+ * @param {*} nodes 
+ * @param {*} edges 
+ */
+export function findNodeParent ( node, nodes, edges ) {
+    if ( !node || !nodes || !Array.isArray(nodes) || 
+                                    !edges || !Array.isArray(edges) ) {
+        return;
+    }
+    
+    // 判断是否是起始节点
+    if ( isStartNode(node) ) {
+        return;
+    }
+
+    let ins = findNodeInEdge(node, edges);
+    if ( !ins || !ins.length || ins.length != 1 ) {
+        return;
+    }
+    const inEdge = ins[0];
+    const inEdgeTarget = inEdge['source'];
+
+    let parent = findNodeById(inEdgeTarget, nodes);
+
+    return parent;
+}
+
+/**
+ * 查找节点的子节点
+ * @param {*} node 
+ * @param {*} nodes 
+ * @param {*} edges 
+ */
+export function findNodeChilren ( node, nodes, edges ) {
+    if ( !node || !nodes || !Array.isArray(nodes) || 
+                                    !edges || !Array.isArray(edges) ) {
+        return;
+    }
+
+    const children = [];
+
+    const outEdges = findNodeOutEdge(node, edges);
+    for ( let outEdge of outEdges ) {
+        const _ = findNodeById(outEdge['target'], nodes);
+        _ && children.push(_);  
+    }
+
+
+    return children;
+}
+

@@ -26,7 +26,7 @@ export function validateNode ( node, graph ) {
         }
     } else if ( util.isRhombusNode(node.model) ) {
         if ( outs.length != 2 || ins.length != 1 ) {
-            return '分控节点必须有2个出口和1个入口';
+            return '路由节点必须有2个出口和1个入口';
         }
     } else if ( util.isRectNode(node.model) ) {
         if ( outs.length != 1 || ins.length != 1 ) {
