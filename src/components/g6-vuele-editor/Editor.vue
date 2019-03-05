@@ -100,7 +100,7 @@ export default {
             } );
         },
         initData (data) {
-            if ( data && Array.isArray(data) ) {
+            if ( data && data.nodes && data.edges ) {
                 this.graphStandard && this.graphStandard.readGraphData(data);
             }
         },

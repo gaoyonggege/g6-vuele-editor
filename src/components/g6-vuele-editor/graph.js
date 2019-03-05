@@ -29,9 +29,9 @@ export function validateNode ( node, graph ) {
             return '路由节点必须有2个出口和1个入口';
         }
     } else if ( util.isRectNode(node.model) ) {
-        if ( outs.length != 1 || ins.length != 1 ) {
-            return '风控节点必须有1个出口和1个入口';
-        }
+        // if ( outs.length != 1 || ins.length != 1 ) {
+        //     return '风控节点必须有1个出口和1个入口';
+        // }
     } else if ( util.isCapsuleNode(node.model) ) {
         if ( outs.length > 0 || ins.length != 1 ) {
             return '额度节点必须有1个入口且没有出口';
@@ -99,11 +99,11 @@ export class GraphStandard {
             return '编辑器没有节点';
         }            
 
-        let ret = this.nodeStandardized(graph, nodes);
+        let ret = this.nodeStandardized(nodes, graph);
         if ( ret != true ) {
             return ret;
         }
-        ret = this.edgeStandardized(graph, edges);
+        ret = this.edgeStandardized(edges, graph);
         if ( ret != true ) {
             return ret;   
         }
@@ -115,7 +115,7 @@ export class GraphStandard {
      * 校验全部节点是否符合规范
      * @param {*} graph 
      */
-    nodeStandardized ( graph, nodes ) {
+    nodeStandardized ( nodes, graph ) {
         if ( !graph ) {
             return false;
         }
@@ -128,10 +128,12 @@ export class GraphStandard {
         }
         
         for ( let node of nodes ) {
-            let ret = this.nodeValidator(node, graph);
-            if ( ret != true ) {
-                return '节点没有绑定因子信息';
-            }        
+            if ( !util.isStartNode(node.model) ) {
+                let ret = this.nodeValidator(node, graph);
+                if ( ret != true ) {
+                    return '节点没有绑定因子信息';
+                }   
+            }
         }
 
         return true;
@@ -141,7 +143,7 @@ export class GraphStandard {
      * 校验全部边是否符合规范
      * @param {*} graph 
      */
-    edgeStandardized ( graph, edges ) {
+    edgeStandardized ( edges, graph ) {
         if ( !graph ) {
             return false;
         }
@@ -186,6 +188,3 @@ export class GraphStandard {
         return graphicals;
     }
 }
-
-
-
