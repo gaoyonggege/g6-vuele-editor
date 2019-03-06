@@ -55,6 +55,9 @@
     display: block;
     height: 600px;
 }
+.gve-editor-boder {
+    border: 1px solid rgba(189, 190, 89, .4);
+}
 .gve-toolbar {
     text-align: center;
     background: white;

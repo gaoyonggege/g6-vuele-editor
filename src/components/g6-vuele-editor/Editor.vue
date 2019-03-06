@@ -1,5 +1,5 @@
 <template>
-<div class="gve-editor">
+<div class="gve-editor" :class="{ 'gve-editor-boder': !editable }">
     <Toolbar :editor="editor" :editable="editable" @toggleGrid="toggleGrid" v-if="editable" />
     <div class="gve-main">
         <div class="gve-lsection" v-if="editable">
