@@ -52,7 +52,7 @@ export default {
     },
     computed: {
         cur () {
-            return this.curZoom*config.zoom.ratio;        
+            return Math.floor(this.curZoom*config.zoom.ratio);    
         },
         min () {
             return this.minZoom*config.zoom.ratio;   
@@ -81,11 +81,16 @@ export default {
         }
     },
     watch: {
-        'editor': function ( val, oldVal ) {
+        editor ( val, oldVal ) {
             if ( val && !oldVal ) {
                 this.init(val);
             }            
         },
+        curZoom ( val, oldVal ) {
+            if ( typeof val === 'number' && val >= 0 ) {
+                this.process = val*config.zoom.ratio;
+            }
+        }
     }
 }
 </script>

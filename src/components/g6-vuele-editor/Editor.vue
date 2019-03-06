@@ -90,6 +90,10 @@ export default {
                     shape: 'flow-polyline-round'
                 });
 
+                page.on('afterzoom', ev => {
+                    this.changeZoom( ev.updateMatrix[0] * config.zoom.ratio );
+                });
+
                 page.zoom(config.zoom.start);
 
                 if (this.editable) {
