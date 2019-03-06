@@ -53,7 +53,7 @@
 
 .gve-editor {
     display: block;
-    height: 800px;
+    height: 600px;
 }
 .gve-toolbar {
     text-align: center;
@@ -61,7 +61,8 @@
     padding: 8px 0px;
     width: 100%;
     border: 1px solid #E9E9E9;
-    height: 44px;
+    height: 30px;
+    line-height: 30px;
     z-index: 3;
     box-shadow: 0px 8px 12px 0px rgba(0, 52, 107, 0.04);
     position: relative;
@@ -187,11 +188,11 @@
 }
 .gve-zoom-slider .process-tip {
     float: right;
-    width: 30px;
+    width: 44px;
     height: 40px;
     line-height: 40px; 
     text-align: center;  
-    margin-right: 20px;     
+    margin-right: 22px;
 }
 .gve-zoom-slider .process-select {
     position: absolute;
@@ -199,7 +200,7 @@
     right: 10px;
 }
 .gve-zoom-slider .custom-slider {
-    margin-right: 60px;
+    margin-right: 70px;
 }
 .gve-zoom-dropdown-btn {
     color: rgba(0,0,0,0.45);
