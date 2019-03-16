@@ -39,10 +39,6 @@ export default {
                 }
             });
             editor.add(page);
-
-            page.on('node:click', ev => {
-                console.log(ev)
-            })
         }
     },
     watch: {

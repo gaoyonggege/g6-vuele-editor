@@ -9,6 +9,7 @@ import G6 from '@antv/g6';
 import data from './data';
 
 import Editor from './components/g6-vuele-editor/Editor';
+import { STATE_EDITING, STATE_SHOWING, EDGE_ADD, NODE_CLICK, } from './components/g6-vuele-editor/const';
 
 export default {
   name: 'app',
@@ -21,9 +22,11 @@ export default {
     Editor,
   },
   methods: {
-      node_click ( item, cb ) {
-        item.model.label = '中欧\n哈哈';
-        cb(item);
+      node_click ( state, item, cb ) {
+        if ( state == STATE_EDITING ) {
+          item.model.label = '中欧\n哈哈';
+          cb(item);
+        }
       },
   },
   mounted () {

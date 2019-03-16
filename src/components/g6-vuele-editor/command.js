@@ -4,7 +4,7 @@
 import { Message, MessageBox } from 'element-ui';
 import G6Editor from '@antv/g6-editor';
 
-import { EDGE_ADD, NODE_CLICK, } from './const';
+import { STATE_EDITING, STATE_SHOWING, EDGE_ADD, NODE_CLICK, } from './const';
 import * as util from './util';
 
 
@@ -25,18 +25,20 @@ export default function init (editor, rootComponent, cb) {
         
         console.log(`click node id : ${ item.model.id }`);
 
-        // 判断是否是编辑态
-        if ( !editor.editable ) {
-            return false;
-        }
-
         if ( util.isStartNode(model) ) {
             return;
         }
 
-        rootComponent.$emit(NODE_CLICK, item, (item) => {
-            graph.update(item, item.model);
-        });
+        // 判断是否是编辑态
+        if ( editor.editable ) {
+            rootComponent.$emit(NODE_CLICK, STATE_EDITING, item, (item) => {
+                graph.update(item, item.model);
+            });
+        } else {
+            rootComponent.$emit(NODE_CLICK, STATE_SHOWING, item, (item) => {
+                
+            });
+        }
     });
     
     // 边节点点击事件
